@@ -3,14 +3,6 @@ from io import BytesIO
 from typing import Tuple
 import os
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-
-def absolute_path(path: str) -> str:
-    """Makes a path which is relative to the root dir become absolute."""
-    return os.path.join(ROOT_DIR, path)
-
-
 class DataFileConverter:
 
     def __init__(self):
