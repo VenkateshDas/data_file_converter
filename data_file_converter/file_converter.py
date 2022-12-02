@@ -1,6 +1,14 @@
 import pandas as pd
 from io import BytesIO
 from typing import Tuple
+import os
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def absolute_path(path: str) -> str:
+    """Makes a path which is relative to the root dir become absolute."""
+    return os.path.join(ROOT_DIR, path)
 
 
 class DataFileConverter:
@@ -20,6 +28,8 @@ class DataFileConverter:
     def convert_to_dataframe(self, input_file_path: BytesIO, file_type: str) -> pd.DataFrame:
         if file_type == 'xlsx':
             df = pd.read_excel(input_file_path)
+        elif file_type == 'pkl':
+            df = pd.read_pickle(input_file_path)
         elif file_type in self.supported_file_types:
             df = getattr(pd, f'read_{file_type}')(input_file_path)
         else:
@@ -28,10 +38,8 @@ class DataFileConverter:
 
     # A function to convert any dataframe to any file format. It accepts dataframe, file path and file types as arguments and returns a dataframe.
     def convert_to_file(self, df: pd.DataFrame, output_file_name: str, file_type: str):
-        if file_type == 'xlsx':
-            df.to_excel(f"{output_file_name}.{file_type}")
-        elif file_type in self.supported_file_types:
-            return getattr(df, f'to_{file_type}')(f"{output_file_name}.{file_type}")
+        if file_type in self.supported_file_types:
+            return getattr(df, f'to_{file_type}')()
         else:
             raise ValueError('File type not supported')
 
