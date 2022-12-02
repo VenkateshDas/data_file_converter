@@ -3,6 +3,7 @@ from io import BytesIO
 from typing import Tuple
 import os
 
+
 class DataFileConverter:
 
     def __init__(self):
