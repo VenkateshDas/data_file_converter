@@ -7,6 +7,7 @@ class DataFileConverter:
 
     def __init__(self):
         self.supported_file_types = ['csv', 'json', 'xlsx', 'parquet', 'feather', 'pickle', 'pkl', 'hdf', 'html', 'xml']
+        # TODO add support for more file types : https://pandas.pydata.org/docs/user_guide/io.html#io-tools-text-csv-hdf5
 
     def _detect_file_type(self, file_path: str) -> str:
         file_type = file_path.split('.')[-1]
