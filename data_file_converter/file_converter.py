@@ -2,6 +2,7 @@ import pandas as pd
 from io import BytesIO
 from typing import Tuple
 import os
+import streamlit as st
 
 
 class DataFileConverter:
@@ -28,6 +29,7 @@ class DataFileConverter:
             df = getattr(pd, f'read_{file_type}')(input_file_path)
         else:
             raise ValueError('File type not supported')
+
         return df
 
     # A function to convert any dataframe to any file format. It accepts dataframe, file path and file types as arguments and returns a dataframe.
@@ -46,4 +48,4 @@ class DataFileConverter:
         output_file = self.convert_to_file(df, input_file_name, output_file_type)
         output_file_name = f"{input_file_name}.{output_file_type}"
 
-        return output_file, output_file_name
+        return output_file, output_file_name, df
