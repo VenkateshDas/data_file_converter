@@ -6,10 +6,10 @@ import os
 # create a streamlit application to convert any file format to any other file format
 st.title("Data File Converter")
 st.write("Convert any supported file format to any other supported file format for data analysis")
-input_file = st.file_uploader("Upload a file", type=['csv', 'json', 'xlsx', 'parquet', 'feather', 'pickle', 'pkl', 'hdf', 'html', 'xml'])
+file_converter = DataFileConverter()
+input_file = st.file_uploader("Upload a file", type=file_converter.supported_file_types)
 
 if input_file is not None:
-    file_converter = DataFileConverter()
     output_file_type = st.selectbox("Select output file type", ['csv', 'json', 'parquet', 'html', 'xml'])
     output_file, output_file_name, df = file_converter.convert_file(input_file, str(output_file_type))
     st.write(df)
