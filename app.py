@@ -10,7 +10,7 @@ input_file = st.file_uploader("Upload a file", type=['csv', 'json', 'xlsx', 'par
 
 if input_file is not None:
     file_converter = DataFileConverter()
-    output_file_type = st.selectbox("Select output file type", file_converter.supported_file_types)
+    output_file_type = st.selectbox("Select output file type", ['csv', 'json', 'parquet', 'html', 'xml'])
     output_file, output_file_name, df = file_converter.convert_file(input_file, str(output_file_type))
     st.write(df)
     convert = st.button("Convert")
